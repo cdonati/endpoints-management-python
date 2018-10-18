@@ -68,7 +68,8 @@ def _running_on_gce():
 def _get_platform():
     server_software = os.environ.get(u'SERVER_SOFTWARE', u'')
 
-    if server_software.startswith(u'Development'):
+    if (server_software.startswith(u'AppScaleServer') or
+        server_software.startswith(u'Development')):
         return report_request.ReportedPlatforms.DEVELOPMENT
     elif os.environ.get(u'KUBERNETES_SERVICE_HOST'):
         return report_request.ReportedPlatforms.GKE
